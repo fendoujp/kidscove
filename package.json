@@ -5,9 +5,9 @@
   "description": "Kidz - Multipurpose Children Kids Theme",
   "author": "Abdus Salam",
   "license": "Copyright of iamAbdus.com",
-  "scripts": { 
-    "start" : "gulp",
-    "build" : "gulp build",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build",
     "publish": "gulp build --pub"
   },
   "devDependencies": {
@@ -23,6 +23,7 @@
     "gulp-notify": "^3.2.0",
     "gulp-plumber": "^1.2.1",
     "gulp-rename": "^2.0.0",
+    "gulp-replace": "^1.0.0",
     "gulp-rtlcss": "^1.4.0",
     "gulp-sass": "^4.0.0",
     "gulp-sourcemaps": "^2.6.0",

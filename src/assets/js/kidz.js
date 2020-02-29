@@ -439,7 +439,7 @@ $('.scrollup').click(function(){
 
     };
     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    var image = 'assets/img/marker.png';
+    var image = '{config.url.assets}/img/marker.png';
     var marker = new google.maps.Marker({
       position: myLatLng,
       map: map,

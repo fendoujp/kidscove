@@ -16,11 +16,12 @@ const imagemin     = require('gulp-imagemin');
 const fileinclude  = require('gulp-file-include');
 const autoprefixer = require('gulp-autoprefixer');
 const gulpif       = require('gulp-if');
+const replace      = require('gulp-replace');
 const argv         = require('minimist')(process.argv.slice(2));
 const browserSync  = require('browser-sync').create();
 
 const path         = {
-      html         : 'src/*.html',
+      html         : 'src/**/*.html',
       htminc       : 'src/_inc/**/*.htm',
       incdir       : 'src/_inc/',
       plugins      : 'src/assets/plugins/**/*.*',
@@ -37,7 +38,16 @@ const sourcemap    = (argv.pub) ? false : true;
 
 const port         = (argv.pub) ? 8003 : 8001;
 
+const uiport       = (argv.pub) ? 8004 : 8002;
 
+const configs      = {
+  url: {
+    assets: (argv.pub) ? 'https://assets.kidscove.net' : '/assets',
+    cn: (argv.pub) ? 'https://zh-cn.kidscove.net' : '/zh-cn',
+    jp: (argv.pub) ? 'https://ja-jp.kidscove.net' : '/ja-jp',
+    en: (argv.pub) ? 'https://en.kidscove.net' : '/en',
+  }
+}
 /* =====================================================
     CLEAN
     ===================================================== */
@@ -56,6 +66,10 @@ const html = function() {
   return src( path.html )
     .pipe(customPlumber('Error Running html-include'))
     .pipe(fileinclude({ basepath: path.incdir }))
+    .pipe(replace('{config.url.cn}', configs.url.cn))
+    .pipe(replace('{config.url.jp}', configs.url.jp))
+    .pipe(replace('{config.url.en}', configs.url.en))
+    .pipe(replace('{config.url.assets}', configs.url.assets))
     .pipe(dest(destination))
     .pipe(browserSync.reload({
       stream: true
@@ -115,6 +129,10 @@ const js = function() {
       }
     }))
     .on('error', gutil.log)
+    .pipe(replace('{config.url.cn}', configs.url.cn))
+    .pipe(replace('{config.url.jp}', configs.url.jp))
+    .pipe(replace('{config.url.en}', configs.url.en))
+    .pipe(replace('{config.url.assets}', configs.url.assets))
     .pipe(gulpif(argv.pub, uglify()))
     .pipe(dest(assets + 'js/'))
     .pipe(browserSync.reload({
@@ -188,6 +206,9 @@ const watcher = function() {
   browserSync.init({
     server: {
       baseDir: destination
+    },
+    ui: {
+      port: uiport
     },
     port: port
   });
