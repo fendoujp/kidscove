@@ -431,53 +431,27 @@ $('.scrollup').click(function(){
     var phone = $("#form_sendemail #phone").val();
     var subject = $("#form_sendemail #subject").val();
     var message = $("#form_sendemail #message").val();
-    message = `<html><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <style type="text/css">
-          pre {
-              font-size: 13px;
-          }
 
-          pre.title {
-              padding-top: 5px;
-              padding-bottom: 5px;
-              border-bottom: 1px dashed lightgray;
-          }
-      </style>
-      <body>
-          <h3>${subject}</h3>
-          <hr />
-          <p>
-              <pre class='title'>姓名：</pre>
-              <pre>${firstname}</pre>
-          </p>
-          <hr />
-          <p>
-              <pre class='title'>Email：</pre>
-              <pre>${email}</pre>
-          </p>
-          <hr />
-          <p>
-              <pre class='title'>电话:</pre>
-              <pre>${phone}</pre>
-          </p>
-          <hr />
-          <p>
-              <pre class='title'>内容：</pre>
-              <pre>${message}</pre>
-          </p>
-      </body></html>`;
+    var template = $("#mailtemplate").html();
+    template = template.replace("${subject}", subject);
+    template = template.replace("${firstname}", firstname);
+    template = template.replace("${email}", email);
+    template = template.replace("${phone}", phone);
+    template = template.replace("${message}", message);
+    
+    message = template;
     grecaptcha.ready(function () {
       grecaptcha.execute('6Le8dt0UAAAAAPWFnjmtQE5WU2PJbzX3e_CruqHb', {
           action: 'homepage'
       }).then(function (token) {
-        let data = {
+        var data = {
             "name": firstname,
             "email": email,
             "message": message,
             "token": token
         };
-        let jsonData = JSON.stringify(data);
-        let url =
+        var jsonData = JSON.stringify(data);
+        var url =
             "https://be2iarsx46.execute-api.ap-northeast-1.amazonaws.com/default/lambda-sendmail";
 
         $.ajax({
@@ -488,7 +462,7 @@ $('.scrollup').click(function(){
             // $("#form_sendemail #submit").removeClass("disabled").attr({
             //     "disabled": false
             // });
-            let alertDiv = $("#form_sendemail div.alert");
+            var alertDiv = $("#form_sendemail div.alert");
             if(alertDiv.length == 0){
               alertDiv = $("<div></div>").addClass("alert");
               $("#form_sendemail").prepend(alertDiv)

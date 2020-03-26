@@ -128,12 +128,17 @@ const js = function() {
         return file.relative + " (" + file.jshint.results.length + " errors)\n";
       }
     }))
-    .on('error', gutil.log)
+    .on('error', function(err) {
+      gutil.log(gutil.colors.red('[Error]'), err.toString());
+    })
     .pipe(replace('{config.url.cn}', configs.url.cn))
     .pipe(replace('{config.url.jp}', configs.url.jp))
     .pipe(replace('{config.url.en}', configs.url.en))
     .pipe(replace('{config.url.assets}', configs.url.assets))
     .pipe(gulpif(argv.pub, uglify()))
+    .on('error', function(err) {
+      gutil.log(gutil.colors.red('[Error]'), err.toString());
+    })
     .pipe(dest(assets + 'js/'))
     .pipe(browserSync.reload({
       stream: true

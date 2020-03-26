@@ -112,6 +112,43 @@
           </div>
         </div>
       </form>
+      <script type="text/template" id="mailtemplate">
+        <html><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style type="text/css">
+            pre {
+                font-size: 13px;
+            }
+  
+            pre.title {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border-bottom: 1px dashed lightgray;
+            }
+        </style>
+        <body>
+            <h3>${subject}</h3>
+            <hr />
+            <p>
+                <pre class="title">姓名：</pre>
+                <pre>${firstname}</pre>
+            </p>
+            <hr />
+            <p>
+                <pre class="title">Email：</pre>
+                <pre>${email}</pre>
+            </p>
+            <hr />
+            <p>
+                <pre class="title">电话:</pre>
+                <pre>${phone}</pre>
+            </p>
+            <hr />
+            <p>
+                <pre class="title">内容：</pre>
+                <pre>${message}</pre>
+            </p>
+        </body></html>
+      </script>
     </div>
   </div>
 </section>
