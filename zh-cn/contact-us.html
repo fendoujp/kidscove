@@ -272,57 +272,93 @@
         frameborder="0" style="width:100%; height:100%; border:0;" allowfullscreen=""></iframe>
     </div>
 
-    <div class="" action="index.html" method="post">
+    <div class="" id="form_sendemail" action="index.html" method="post">
       <form>
         <div class="row">
           <div class="col-sm-6 col-xs-12">
             <div class="form-group form-group-icon">
               <i class="fa fa-user"></i>
-              <input type="text" class="form-control border-warning" placeholder="First name" required="">
+              <input type="text" class="form-control border-warning" id="firstname" placeholder="First name" required="">
             </div>
           </div>
 
           <div class="col-sm-6 col-xs-12">
             <div class="form-group form-group-icon">
               <i class="fa fa-envelope"></i>
-              <input type="email" class="form-control border-success" placeholder="Email address" required="">
+              <input type="email" class="form-control border-success" id="email" placeholder="Email address" required="">
             </div>
           </div>
 
           <div class="col-sm-6 col-xs-12">
             <div class="form-group form-group-icon">
               <i class="fa fa-phone"></i>
-              <input type="text" class="form-control border-purple" placeholder="Phone" required="">
+              <input type="text" class="form-control border-purple" id="phone" placeholder="Phone" required="">
             </div>
           </div>
 
           <div class="col-sm-6 col-xs-12">
             <div class="form-group form-group-icon">
               <i class="fa fa-book"></i>
-              <input type="text" class="form-control border-pink" placeholder="Subject" required="">
+              <input type="text" class="form-control border-pink" id="subject" placeholder="Subject" required="">
             </div>
           </div>
 
           <div class="col-12">
             <div class="form-group form-group-icon">
               <i class="fa fa-comments"></i>
-              <textarea class="form-control border-info" placeholder="Write message" rows="6"></textarea>
+              <textarea class="form-control border-info" id="message" placeholder="Write message" rows="6"></textarea>
             </div>
           </div>
 
           <div class="col-12">
             <div class="text-sm-center mt-6">
-              <button type="submit" class="btn btn-danger text-uppercase">
+              <button type="submit" id="submit" class="btn btn-danger text-uppercase">
                 Send Message
               </button>
             </div>
           </div>
         </div>
       </form>
+      <script type="text/template" id="mailtemplate">
+        <html><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style type="text/css">
+            pre {
+                font-size: 13px;
+            }
+  
+            pre.title {
+                padding-top: 5px;
+                padding-bottom: 5px;
+                border-bottom: 1px dashed lightgray;
+            }
+        </style>
+        <body>
+            <h3>${subject}</h3>
+            <hr />
+            <p>
+                <pre class="title">姓名：</pre>
+                <pre>${firstname}</pre>
+            </p>
+            <hr />
+            <p>
+                <pre class="title">Email：</pre>
+                <pre>${email}</pre>
+            </p>
+            <hr />
+            <p>
+                <pre class="title">电话:</pre>
+                <pre>${phone}</pre>
+            </p>
+            <hr />
+            <p>
+                <pre class="title">内容：</pre>
+                <pre>${message}</pre>
+            </p>
+        </body></html>
+      </script>
     </div>
   </div>
 </section>
-
 </div> <!-- element wrapper ends -->
 
 <!-- ====================================
@@ -703,6 +739,7 @@
 -->
 
 <script src="https://assets.kidscove.net/plugins/wow/wow.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Le8dt0UAAAAAPWFnjmtQE5WU2PJbzX3e_CruqHb"></script>
 <script src="https://assets.kidscove.net/js/kidz.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-159327693-1"></script>
