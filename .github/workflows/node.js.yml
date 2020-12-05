@@ -29,6 +29,6 @@ jobs:
           CI=false && npm run publish
           git config --global user.email github@kansea.com
           git config --global user.name  github
-          git --work-tree build add --all
+          git --work-tree build/publish add --all
           git commit -m "Automatic Deploy action run by github-actions"
-          git push origin HEAD:gh-pages --force
+          git push origin HEAD:auto-build --force
