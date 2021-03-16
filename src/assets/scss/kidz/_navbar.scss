@@ -22,9 +22,6 @@
     }
     img {
       max-width: 200px;
-      @include media-breakpoint-up(md) {
-        width: 200px;
-      }
       @include media-breakpoint-up(lg) {
         max-width: 266px;
       }
